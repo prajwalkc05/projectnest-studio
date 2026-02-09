@@ -2,6 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -12,6 +19,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+  min-height: 100vh;
 }
 
 a {
@@ -24,11 +33,17 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 input, textarea, select {
   font-family: inherit;
   outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -44,7 +59,8 @@ img {
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  width: 100%;
 }
 
 /* Navbar Responsive */
@@ -59,20 +75,72 @@ img {
   display: none;
 }
 
+/* Base responsive styles */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 clamp(1rem, 3vw, 1.5rem);
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 1rem;
   }
   
   .nav-desktop {
-    display: none;
+    display: none !important;
   }
   
   .nav-mobile-toggle {
-    display: flex;
+    display: flex !important;
   }
   
   h1 {
     font-size: clamp(2rem, 8vw, 3rem) !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+  }
+  
+  /* Improve touch targets */
+  button:not(.nav-mobile-toggle), a {
+    min-height: 44px;
+  }
+  
+  /* Prevent iOS zoom on input focus */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+  
+  /* Better spacing on mobile */
+  section {
+    padding: clamp(3rem, 8vw, 4rem) clamp(1rem, 4vw, 1.5rem) !important;
+  }
+}
+
+/* Small phones (iPhone SE, etc) */
+@media (max-width: 375px) {
+  .container {
+    padding: 0 0.875rem;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Tablets and large phones */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  section {
+    padding: 2rem 1rem !important;
   }
 }

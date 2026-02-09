@@ -163,7 +163,15 @@ const Home = () => {
               y: -3,
             }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/contact')}
+            onClick={() => {
+              const element = document.getElementById('contact');
+              if (element) {
+                const navbarHeight = 73;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - navbarHeight;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              }
+            }}
             animate={{
               boxShadow: [
                 '0 4px 20px rgba(251, 146, 60, 0.3)',
@@ -199,7 +207,15 @@ const Home = () => {
           <motion.button
             whileHover={{ scale: 1.05, borderColor: '#fb923c', color: '#fb923c', background: 'rgba(251, 146, 60, 0.05)' }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => navigate('/freelancing-services')}
+            onClick={() => {
+              const element = document.getElementById('freelancing-section');
+              if (element) {
+                const navbarHeight = 73;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - navbarHeight;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              }
+            }}
             style={{
               padding: '1.125rem 2.75rem',
               fontSize: '1.05rem',
