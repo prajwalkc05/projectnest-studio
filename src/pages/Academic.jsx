@@ -137,24 +137,26 @@ const Academic = () => {
               {academicServices.map((service, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px', amount: 0.3 }}
-                  transition={{ duration: 0.4 }}
-                  whileHover={{ 
-                    y: -5,
-                    boxShadow: '0 12px 40px rgba(251, 146, 60, 0.3)',
-                    borderColor: 'rgba(251, 146, 60, 0.5)',
-                  }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.3 }}
                   style={{
-                    background: 'rgba(30, 41, 59, 0.5)',
-                    backdropFilter: 'blur(10px)',
+                    background: 'rgba(30, 41, 59, 0.8)',
                     border: '1px solid rgba(251, 146, 60, 0.2)',
                     borderRadius: '16px',
                     padding: '2rem',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                    transition: 'all 0.3s ease',
-                    willChange: 'transform',
+                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-5px)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(251, 146, 60, 0.3)';
+                    e.currentTarget.style.borderColor = 'rgba(251, 146, 60, 0.5)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.3)';
+                    e.currentTarget.style.borderColor = 'rgba(251, 146, 60, 0.2)';
                   }}
                 >
                   <div style={{

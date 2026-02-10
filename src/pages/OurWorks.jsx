@@ -44,19 +44,16 @@ const OurWorks = () => {
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => (
                 <motion.div
                   key={item}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px', amount: 0.3 }}
-                  transition={{ duration: 0.4 }}
-                  whileHover={{ y: -5 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.3 }}
                   style={{
-                    background: 'rgba(30, 41, 59, 0.5)',
-                    backdropFilter: 'blur(10px)',
+                    background: 'rgba(30, 41, 59, 0.8)',
                     border: '1px solid rgba(251, 146, 60, 0.2)',
                     borderRadius: '16px',
                     overflow: 'hidden',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                    willChange: 'transform',
+                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
                   }}
                 >
                   <div style={{
@@ -66,11 +63,11 @@ const OurWorks = () => {
                     background: '#0f172a',
                   }}>
                     <video
-                      autoPlay
                       loop
                       muted
                       playsInline
-                      preload="metadata"
+                      preload="none"
+                      loading="lazy"
                       style={{
                         position: 'absolute',
                         top: 0,
@@ -79,6 +76,7 @@ const OurWorks = () => {
                         height: '100%',
                         objectFit: 'cover',
                       }}
+                      onLoadedData={(e) => e.target.play()}
                     >
                       <source src={`/videos/project${((item - 1) % 4) + 1}.mp4`} type="video/mp4" />
                       Your browser does not support the video tag.
