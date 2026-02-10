@@ -269,7 +269,13 @@ const Navbar = () => {
                   style={{ margin: 0 }}
                 >
                   <button
-                    onClick={() => link.id === 'home' ? scrollToTop() : scrollToSection(link.id)}
+                    onClick={() => {
+                      if (link.id === 'home') {
+                        scrollToTop();
+                      } else {
+                        scrollToSection(link.id);
+                      }
+                    }}
                     style={{
                       width: '100%',
                       textAlign: 'left',
@@ -282,6 +288,7 @@ const Navbar = () => {
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
                       borderRadius: '8px',
+                      WebkitTapHighlightColor: 'transparent',
                     }}
                     onTouchStart={(e) => {
                       e.currentTarget.style.color = '#fb923c';
@@ -289,8 +296,10 @@ const Navbar = () => {
                     }}
                     onTouchEnd={(e) => {
                       setTimeout(() => {
-                        e.currentTarget.style.color = '#94a3b8';
-                        e.currentTarget.style.background = 'none';
+                        if (e.currentTarget) {
+                          e.currentTarget.style.color = '#94a3b8';
+                          e.currentTarget.style.background = 'none';
+                        }
                       }, 150);
                     }}
                     onMouseEnter={(e) => {
