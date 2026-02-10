@@ -8,6 +8,47 @@ const GlobalBackground = () => {
       zIndex: 0,
       background: 'linear-gradient(180deg, #020617 0%, #0f172a 50%, #020617 100%)',
     }}>
+      {/* CSS-only flashing effect */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '20%',
+          left: '50%',
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(251, 146, 60, 0.3), transparent 60%)',
+          borderRadius: '50%',
+          filter: 'blur(100px)',
+          transform: 'translateX(-50%)',
+          animation: 'flash1 4s ease-in-out infinite',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '25%',
+          left: '25%',
+          width: '450px',
+          height: '450px',
+          background: 'radial-gradient(circle, rgba(249, 115, 22, 0.25), transparent 60%)',
+          borderRadius: '50%',
+          filter: 'blur(100px)',
+          animation: 'flash2 5s ease-in-out infinite 2s',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          right: '15%',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(234, 88, 12, 0.28), transparent 60%)',
+          borderRadius: '50%',
+          filter: 'blur(100px)',
+          animation: 'flash3 4.5s ease-in-out infinite 1s',
+        }}
+      />
     </div>
   );
 };
