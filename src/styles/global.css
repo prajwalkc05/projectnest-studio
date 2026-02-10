@@ -144,3 +144,10 @@ img {
     padding: 2rem 1rem !important;
   }
 }
+
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

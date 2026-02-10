@@ -42,18 +42,17 @@ const OurWorks = () => {
               margin: '0 auto',
             }}>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => (
-                <motion.div
+                <div
                   key={item}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.3 }}
                   style={{
-                    background: 'rgba(30, 41, 59, 0.8)',
+                    background: 'rgba(30, 41, 59, 0.9)',
                     border: '1px solid rgba(251, 146, 60, 0.2)',
                     borderRadius: '16px',
                     overflow: 'hidden',
                     boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+                    opacity: 0,
+                    animation: 'fadeIn 0.5s ease forwards',
+                    animationDelay: `${(item % 4) * 0.1}s`,
                   }}
                 >
                   <div style={{
@@ -121,7 +120,7 @@ const OurWorks = () => {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

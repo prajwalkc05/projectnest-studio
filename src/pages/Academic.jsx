@@ -135,28 +135,26 @@ const Academic = () => {
               margin: '0 auto',
             }}>
               {academicServices.map((service, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.3 }}
                   style={{
-                    background: 'rgba(30, 41, 59, 0.8)',
+                    background: 'rgba(30, 41, 59, 0.9)',
                     border: '1px solid rgba(251, 146, 60, 0.2)',
                     borderRadius: '16px',
                     padding: '2rem',
                     boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    opacity: 0,
+                    animation: 'fadeIn 0.5s ease forwards',
+                    animationDelay: `${(index % 2) * 0.1}s`,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-5px)';
                     e.currentTarget.style.boxShadow = '0 8px 24px rgba(251, 146, 60, 0.3)';
-                    e.currentTarget.style.borderColor = 'rgba(251, 146, 60, 0.5)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.3)';
-                    e.currentTarget.style.borderColor = 'rgba(251, 146, 60, 0.2)';
                   }}
                 >
                   <div style={{
@@ -245,7 +243,7 @@ const Academic = () => {
                       </span>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
