@@ -112,7 +112,9 @@ const Academic = () => {
                 fontWeight: '800',
                 marginBottom: '1rem',
                 background: 'linear-gradient(135deg, #fb923c, #f97316)',
+                backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
+                color: 'transparent',
                 WebkitTextFillColor: 'transparent',
               }}>
                 Academic Services
