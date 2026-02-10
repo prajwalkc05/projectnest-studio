@@ -75,7 +75,10 @@ const Portfolio = () => {
                   loop
                   muted
                   playsInline
-                  onError={(e) => e.target.style.display = 'none'}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.preventDefault();
+                  }}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -85,7 +88,7 @@ const Portfolio = () => {
                     objectFit: 'cover',
                   }}
                 >
-                  <source src={`/videos/project${item}.mp4`} type="video/mp4" />
+                  <source src={`/videos/project${item}.mp4`} type="video/mp4" onError={(e) => e.preventDefault()} />
                 </video>
               </div>
               <div style={{ padding: '1rem' }}>

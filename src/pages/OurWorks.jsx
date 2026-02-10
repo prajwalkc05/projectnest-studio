@@ -79,7 +79,10 @@ const OurWorks = () => {
                         playsInline
                         preload="none"
                         onLoadedData={(e) => e.target.play().catch(() => {})}
-                        onError={(e) => e.target.style.display = 'none'}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.preventDefault();
+                        }}
                         style={{
                           position: 'absolute',
                           top: 0,
@@ -89,7 +92,7 @@ const OurWorks = () => {
                           objectFit: 'cover',
                         }}
                       >
-                        <source src={`/videos/project${((item - 1) % 4) + 1}.mp4`} type="video/mp4" />
+                        <source src={`/videos/project${((item - 1) % 4) + 1}.mp4`} type="video/mp4" onError={(e) => e.preventDefault()} />
                       </video>
                     ) : (
                       <div style={{
