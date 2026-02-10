@@ -1,8 +1,9 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -25,8 +26,18 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   const scrollToSection = (id) => {
+    setIsMenuOpen(false);
     if (location.pathname !== '/') {
-      window.location.href = '/#' + id;
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const navbarHeight = 73;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - navbarHeight;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
       return;
     }
     const element = document.getElementById(id);
@@ -34,22 +45,18 @@ const Navbar = () => {
       const navbarHeight = 73;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
-    setIsMenuOpen(false);
   };
 
   const scrollToTop = () => {
+    setIsMenuOpen(false);
     if (location.pathname !== '/') {
-      window.location.href = '/';
+      navigate('/');
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
       return;
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setIsMenuOpen(false);
   };
 
   const links = [
