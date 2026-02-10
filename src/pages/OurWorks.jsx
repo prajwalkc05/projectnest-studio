@@ -1,7 +1,16 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import GlobalBackground from '../components/GlobalBackground';
 
 const OurWorks = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   return (
     <>
       <GlobalBackground />
@@ -50,8 +59,8 @@ const OurWorks = () => {
                     borderRadius: '16px',
                     overflow: 'hidden',
                     boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
-                    opacity: 0,
-                    animation: 'fadeIn 0.5s ease forwards',
+                    opacity: 1,
+                    animation: isMobile ? 'none' : 'fadeIn 0.5s ease forwards',
                     animationDelay: `${(item % 4) * 0.1}s`,
                   }}
                 >
@@ -61,25 +70,40 @@ const OurWorks = () => {
                     paddingTop: '56.25%',
                     background: '#0f172a',
                   }}>
-                    <video
-                      loop
-                      muted
-                      playsInline
-                      preload="none"
-                      loading="lazy"
-                      style={{
+                    {!isMobile ? (
+                      <video
+                        loop
+                        muted
+                        playsInline
+                        preload="none"
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                        onLoadedData={(e) => e.target.play()}
+                      >
+                        <source src={`/videos/project${((item - 1) % 4) + 1}.mp4`} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <div style={{
                         position: 'absolute',
                         top: 0,
                         left: 0,
                         width: '100%',
                         height: '100%',
-                        objectFit: 'cover',
-                      }}
-                      onLoadedData={(e) => e.target.play()}
-                    >
-                      <source src={`/videos/project${((item - 1) % 4) + 1}.mp4`} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                        background: 'linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(249, 115, 22, 0.2))',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '3rem',
+                      }}>
+                        🎬
+                      </div>
+                    )}
                   </div>
                   <div style={{ padding: '1.5rem' }}>
                     <h3 style={{
