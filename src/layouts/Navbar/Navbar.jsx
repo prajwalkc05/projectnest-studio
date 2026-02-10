@@ -25,9 +25,13 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   const scrollToSection = (id) => {
+    if (location.pathname !== '/') {
+      window.location.href = '/#' + id;
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = 73; // Navbar height
+      const navbarHeight = 73;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
       
@@ -40,6 +44,10 @@ const Navbar = () => {
   };
 
   const scrollToTop = () => {
+    if (location.pathname !== '/') {
+      window.location.href = '/';
+      return;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsMenuOpen(false);
   };

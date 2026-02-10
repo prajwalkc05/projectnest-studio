@@ -5,6 +5,7 @@ import ServicesSection from './ServicesSection';
 import FreelancingSection from './FreelancingSection';
 import HowItWorks from './HowItWorks';
 import WhyChooseUs from './WhyChooseUs';
+import Portfolio from './Portfolio';
 import Contact from './Contact';
 import GlobalBackground from '../components/GlobalBackground';
 
@@ -297,6 +298,7 @@ const Home = () => {
     <FreelancingSection />
     <HowItWorks />
     <WhyChooseUs />
+    <Portfolio />
     <Contact />
     </>
   );
