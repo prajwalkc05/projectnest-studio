@@ -14,13 +14,13 @@ const GlobalBackground = () => {
           position: 'absolute',
           top: '20%',
           left: '50%',
-          width: '600px',
-          height: '600px',
-          background: 'radial-gradient(circle, rgba(251, 146, 60, 0.4), transparent 55%)',
+          width: '700px',
+          height: '700px',
+          background: 'radial-gradient(circle, rgba(251, 146, 60, 0.6), transparent 50%)',
           borderRadius: '50%',
-          filter: 'blur(90px)',
+          filter: 'blur(80px)',
           transform: 'translateX(-50%)',
-          animation: 'flash1 4s ease-in-out infinite',
+          animation: 'flash1 3s ease-in-out infinite',
         }}
       />
       <div
@@ -28,12 +28,12 @@ const GlobalBackground = () => {
           position: 'absolute',
           bottom: '25%',
           left: '25%',
-          width: '550px',
-          height: '550px',
-          background: 'radial-gradient(circle, rgba(249, 115, 22, 0.35), transparent 55%)',
+          width: '650px',
+          height: '650px',
+          background: 'radial-gradient(circle, rgba(249, 115, 22, 0.55), transparent 50%)',
           borderRadius: '50%',
-          filter: 'blur(90px)',
-          animation: 'flash2 5s ease-in-out infinite 2s',
+          filter: 'blur(80px)',
+          animation: 'flash2 4s ease-in-out infinite 1.5s',
         }}
       />
       <div
@@ -41,12 +41,12 @@ const GlobalBackground = () => {
           position: 'absolute',
           top: '50%',
           right: '15%',
-          width: '500px',
-          height: '500px',
-          background: 'radial-gradient(circle, rgba(234, 88, 12, 0.38), transparent 55%)',
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(circle, rgba(234, 88, 12, 0.58), transparent 50%)',
           borderRadius: '50%',
-          filter: 'blur(90px)',
-          animation: 'flash3 4.5s ease-in-out infinite 1s',
+          filter: 'blur(80px)',
+          animation: 'flash3 3.5s ease-in-out infinite 0.5s',
         }}
       />
     </div>
