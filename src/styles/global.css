@@ -157,7 +157,7 @@ img {
     opacity: 0;
   }
   50% {
-    opacity: 0.3;
+    opacity: 0.4;
   }
 }
 
@@ -166,7 +166,7 @@ img {
     opacity: 0;
   }
   50% {
-    opacity: 0.25;
+    opacity: 0.35;
   }
 }
 
@@ -175,6 +175,6 @@ img {
     opacity: 0;
   }
   50% {
-    opacity: 0.28;
+    opacity: 0.38;
   }
 }
