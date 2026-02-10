@@ -51,8 +51,11 @@ const Home = () => {
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: 'center',
-      padding: '6rem 2rem 4rem',
+      padding: '6rem 1rem 4rem',
       position: 'relative',
+      width: '100%',
+      maxWidth: '100vw',
+      overflow: 'hidden',
     }}>
       <motion.div
         className="container"

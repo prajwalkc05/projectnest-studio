@@ -39,8 +39,11 @@ const WhyChooseUs = () => {
     <section
       id="why-choose-us"
       style={{
-        padding: 'clamp(4rem, 10vw, 6rem) clamp(1.5rem, 4vw, 2rem)',
+        padding: 'clamp(4rem, 10vw, 6rem) 1rem',
         position: 'relative',
+        width: '100%',
+        maxWidth: '100vw',
+        overflow: 'hidden',
       }}
     >
       <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>

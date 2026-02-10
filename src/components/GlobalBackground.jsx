@@ -7,6 +7,9 @@ const GlobalBackground = () => {
       inset: 0,
       zIndex: 0,
       background: 'linear-gradient(180deg, #020617 0%, #0f172a 50%, #020617 100%)',
+      width: '100vw',
+      height: '100vh',
+      overflow: 'hidden',
     }}>
       {/* CSS-only flashing effect */}
       <div

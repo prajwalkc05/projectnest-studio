@@ -45,8 +45,11 @@ const HowItWorks = () => {
     <section
       id="how-it-works"
       style={{
-        padding: 'clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 2rem)',
+        padding: 'clamp(3rem, 8vw, 5rem) 1rem',
         position: 'relative',
+        width: '100%',
+        maxWidth: '100vw',
+        overflow: 'hidden',
       }}
     >
       <div className="container" style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 1 }}>

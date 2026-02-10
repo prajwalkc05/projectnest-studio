@@ -15,8 +15,11 @@ const ServicesSection = () => {
 
   return (
     <section id="academic-section" style={{ 
-      padding: '6rem 2rem', 
+      padding: '6rem 1rem', 
       position: 'relative',
+      width: '100%',
+      maxWidth: '100vw',
+      overflow: 'hidden',
     }}>
       <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <motion.div
