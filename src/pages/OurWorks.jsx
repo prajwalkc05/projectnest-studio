@@ -76,6 +76,8 @@ const OurWorks = () => {
                         muted
                         playsInline
                         preload="none"
+                        onLoadedData={(e) => e.target.play().catch(() => {})}
+                        onError={(e) => e.target.style.display = 'none'}
                         style={{
                           position: 'absolute',
                           top: 0,
@@ -84,7 +86,6 @@ const OurWorks = () => {
                           height: '100%',
                           objectFit: 'cover',
                         }}
-                        onLoadedData={(e) => e.target.play()}
                       >
                         <source src={`/videos/project${((item - 1) % 4) + 1}.mp4`} type="video/mp4" />
                       </video>

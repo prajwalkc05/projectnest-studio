@@ -73,6 +73,7 @@ const Portfolio = () => {
                   loop
                   muted
                   playsInline
+                  onError={(e) => e.target.style.display = 'none'}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -83,7 +84,6 @@ const Portfolio = () => {
                   }}
                 >
                   <source src={`/videos/project${item}.mp4`} type="video/mp4" />
-                  Your browser does not support the video tag.
                 </video>
               </div>
               <div style={{ padding: '1rem' }}>
