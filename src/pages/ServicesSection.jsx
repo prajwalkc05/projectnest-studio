@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import ServiceCard from '../components/ui/ServiceCard';
 
 const ServicesSection = () => {
+  const navigate = useNavigate();
   const services = [
     { icon: '📝', title: 'Mini & Major Projects', description: 'Complete academic projects with documentation, source code, and presentation support' },
     { icon: '⚡', title: 'Full Stack Projects', description: 'End-to-end web applications with modern frameworks, databases, and deployment' },
@@ -65,12 +67,43 @@ const ServicesSection = () => {
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', 
-          gap: 'clamp(1.25rem, 3vw, 2rem)'
+          gap: 'clamp(1.25rem, 3vw, 2rem)',
+          marginBottom: '3rem',
         }}>
           {services.map((service, index) => (
             <ServiceCard key={index} {...service} delay={index * 0.1} index={index} dark />  
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{ textAlign: 'center' }}
+        >
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(251, 146, 60, 0.6)' }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              navigate('/academic');
+              setTimeout(() => window.scrollTo(0, 0), 100);
+            }}
+            style={{
+              padding: '1rem 2.5rem',
+              fontSize: '1rem',
+              fontWeight: '600',
+              background: 'linear-gradient(135deg, #fb923c, #f97316)',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              boxShadow: '0 4px 20px rgba(251, 146, 60, 0.3)',
+            }}
+          >
+            View Details
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );

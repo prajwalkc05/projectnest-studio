@@ -66,7 +66,7 @@ img {
 /* Navbar Responsive */
 .nav-desktop {
   display: flex;
-  gap: 40px;
+  gap: 8px;
   list-style: none;
   align-items: center;
 }

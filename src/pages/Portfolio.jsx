@@ -117,7 +117,10 @@ const Portfolio = () => {
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(251, 146, 60, 0.6)' }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/our-works')}
+            onClick={() => {
+              navigate('/our-works');
+              setTimeout(() => window.scrollTo(0, 0), 100);
+            }}
             style={{
               padding: '1rem 2.5rem',
               fontSize: '1rem',

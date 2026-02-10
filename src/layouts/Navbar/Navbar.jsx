@@ -110,7 +110,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         {!isMobile && (
-          <ul className="nav-desktop" style={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+          <ul className="nav-desktop" style={{ gap: '8px' }}>
             {links.map((link) => (
               <motion.li
                 key={link.label}
@@ -123,9 +123,9 @@ const Navbar = () => {
                     position: 'relative',
                     color: '#94a3b8',
                     fontWeight: '500',
-                    fontSize: '15px',
+                    fontSize: '14px',
                     transition: 'color 0.3s ease',
-                    padding: '8px 16px',
+                    padding: '8px 12px',
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',

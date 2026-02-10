@@ -5,8 +5,8 @@ const OurWorks = () => {
   return (
     <>
       <GlobalBackground />
-      <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh', paddingTop: '5rem' }}>
-        <section style={{ padding: '4rem 2rem' }}>
+      <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh', paddingTop: 'clamp(4rem, 10vw, 5rem)' }}>
+        <section style={{ padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem)' }}>
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -36,8 +36,8 @@ const OurWorks = () => {
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-              gap: '2rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+              gap: 'clamp(1rem, 3vw, 2rem)',
               maxWidth: '1400px',
               margin: '0 auto',
             }}>
@@ -46,9 +46,9 @@ const OurWorks = () => {
                   key={item}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.5, delay: (item % 4) * 0.1 }}
-                  whileHover={{ y: -10, scale: 1.02 }}
+                  viewport={{ once: true, margin: '-50px', amount: 0.3 }}
+                  transition={{ duration: 0.4 }}
+                  whileHover={{ y: -5 }}
                   style={{
                     background: 'rgba(30, 41, 59, 0.5)',
                     backdropFilter: 'blur(10px)',
@@ -56,6 +56,7 @@ const OurWorks = () => {
                     borderRadius: '16px',
                     overflow: 'hidden',
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                    willChange: 'transform',
                   }}
                 >
                   <div style={{
@@ -69,6 +70,7 @@ const OurWorks = () => {
                       loop
                       muted
                       playsInline
+                      preload="metadata"
                       style={{
                         position: 'absolute',
                         top: 0,
