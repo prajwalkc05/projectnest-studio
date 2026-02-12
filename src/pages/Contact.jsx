@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import ContactCard from '../components/ui/ContactCard';
 import InputField from '../components/ui/InputField';
 
@@ -11,11 +12,73 @@ const Contact = () => {
     service: '',
     message: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({ type: '', message: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add form submission logic here
+    setLoading(true);
+    setStatus({ type: '', message: '' });
+
+    let emailSuccess = false;
+    let backendSuccess = false;
+
+    try {
+      // Send email via EmailJS
+      try {
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            service: formData.service,
+            message: formData.message,
+          },
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+        emailSuccess = true;
+      } catch (emailError) {
+        console.error('EmailJS error:', emailError);
+      }
+
+      // Save to backend
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+        if (response.ok) {
+          backendSuccess = true;
+        }
+      } catch (backendError) {
+        console.error('Backend error:', backendError);
+      }
+
+      // Show appropriate message
+      if (emailSuccess || backendSuccess) {
+        setStatus({ 
+          type: 'success', 
+          message: 'Message sent successfully! We\'ll respond within 24 hours.' 
+        });
+        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+      } else {
+        setStatus({ 
+          type: 'error', 
+          message: 'Unable to send message. Please contact us directly via email or WhatsApp.' 
+        });
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus({ 
+        type: 'error', 
+        message: 'Unable to send message. Please contact us directly via email or WhatsApp.' 
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -239,37 +302,58 @@ const Contact = () => {
                 required
               />
 
+              {/* Status Message */}
+              {status.message && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    padding: '0.75rem 1rem',
+                    borderRadius: '8px',
+                    fontSize: '0.875rem',
+                    marginTop: '1rem',
+                    background: status.type === 'success' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                    border: `1px solid ${status.type === 'success' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+                    color: status.type === 'success' ? '#22c55e' : '#ef4444',
+                  }}
+                >
+                  {status.message}
+                </motion.div>
+              )}
+
               {/* Submit Button */}
               <motion.button
                 type="submit"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={loading}
+                whileHover={!loading ? { y: -2 } : {}}
+                whileTap={!loading ? { scale: 0.98 } : {}}
                 style={{
                   width: '100%',
                   padding: '1rem',
                   fontSize: '1rem',
                   fontWeight: '600',
                   color: '#ffffff',
-                  background: 'linear-gradient(135deg, #fb923c, #f97316)',
+                  background: loading ? 'rgba(251, 146, 60, 0.5)' : 'linear-gradient(135deg, #fb923c, #f97316)',
                   border: 'none',
                   borderRadius: '10px',
-                  cursor: 'pointer',
+                  cursor: loading ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '0.5rem',
                   transition: 'all 0.3s ease',
                   marginTop: '1.5rem',
+                  opacity: loading ? 0.7 : 1,
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.boxShadow = '0 8px 20px rgba(251, 146, 60, 0.4)';
+                  if (!loading) e.target.style.boxShadow = '0 8px 20px rgba(251, 146, 60, 0.4)';
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.boxShadow = 'none';
                 }}
               >
-                Send Message
-                <span>→</span>
+                {loading ? 'Sending...' : 'Send Message'}
+                {!loading && <span>→</span>}
               </motion.button>
             </form>
           </motion.div>
