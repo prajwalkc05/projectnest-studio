@@ -26,7 +26,13 @@ const Contact = () => {
     try {
       // Send email via EmailJS
       try {
-        await emailjs.send(
+        console.log('EmailJS Config:', {
+          serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        });
+        
+        const result = await emailjs.send(
           import.meta.env.VITE_EMAILJS_SERVICE_ID,
           import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
           {
@@ -38,9 +44,12 @@ const Contact = () => {
           },
           import.meta.env.VITE_EMAILJS_PUBLIC_KEY
         );
+        console.log('EmailJS SUCCESS:', result);
         emailSuccess = true;
       } catch (emailError) {
-        console.error('EmailJS error:', emailError);
+        console.error('EmailJS ERROR:', emailError);
+        console.error('Error status:', emailError.status);
+        console.error('Error text:', emailError.text);
       }
 
       // Save to backend
@@ -52,9 +61,12 @@ const Contact = () => {
         });
         if (response.ok) {
           backendSuccess = true;
+          console.log('Backend SUCCESS');
+        } else {
+          console.error('Backend ERROR:', await response.text());
         }
       } catch (backendError) {
-        console.error('Backend error:', backendError);
+        console.error('Backend connection error:', backendError);
       }
 
       // Show appropriate message
@@ -67,7 +79,7 @@ const Contact = () => {
       } else {
         setStatus({ 
           type: 'error', 
-          message: 'Unable to send message. Please contact us directly via email or WhatsApp.' 
+          message: 'Unable to send message. Please check console for details or contact us directly via email/WhatsApp.' 
         });
       }
     } catch (error) {

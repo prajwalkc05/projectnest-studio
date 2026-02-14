@@ -59,12 +59,25 @@ const Navbar = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOurWorksClick = () => {
+    setIsMenuOpen(false);
+    if (location.pathname === '/our-works') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (location.pathname === '/') {
+      scrollToSection('portfolio');
+    } else {
+      navigate('/');
+      setTimeout(() => scrollToSection('portfolio'), 100);
+    }
+  };
+
   const links = [
     { id: 'home', label: 'Home', type: 'scroll' },
     { id: 'academic-section', label: 'Academic', type: 'scroll' },
     { id: 'freelancing-section', label: 'Freelancing', type: 'scroll' },
     { id: 'how-it-works', label: 'Process', type: 'scroll' },
     { id: 'why-choose-us', label: 'Why Us', type: 'scroll' },
+    { id: 'portfolio', label: 'Our Works', type: 'scroll' },
     { id: 'contact', label: 'Contact', type: 'scroll' },
   ];
 
@@ -75,11 +88,13 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       style={{
-        background: 'rgba(2, 6, 23, 0.85)',
+        background: 'rgba(2, 6, 23, 0.95)',
         backdropFilter: 'blur(16px)',
         borderBottom: '1px solid rgba(251, 146, 60, 0.1)',
-        position: 'sticky',
+        position: 'fixed',
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 9999,
         boxShadow: '0 4px 24px rgba(0, 0, 0, 0.1)',
       }}
@@ -125,7 +140,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <button
-                  onClick={() => link.id === 'home' ? scrollToTop() : scrollToSection(link.id)}
+                  onClick={() => link.id === 'home' ? scrollToTop() : link.id === 'portfolio' ? handleOurWorksClick() : scrollToSection(link.id)}
                   style={{
                     position: 'relative',
                     color: '#94a3b8',
@@ -272,6 +287,8 @@ const Navbar = () => {
                     onClick={() => {
                       if (link.id === 'home') {
                         scrollToTop();
+                      } else if (link.id === 'portfolio') {
+                        handleOurWorksClick();
                       } else {
                         scrollToSection(link.id);
                       }

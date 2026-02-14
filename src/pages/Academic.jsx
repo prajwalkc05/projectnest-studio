@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import GlobalBackground from '../components/GlobalBackground';
 
 const Academic = () => {
+  const navigate = useNavigate();
   const academicServices = [
     {
       icon: '📝',
@@ -107,6 +109,29 @@ const Academic = () => {
               transition={{ duration: 0.6 }}
               style={{ textAlign: 'center', marginBottom: '4rem' }}
             >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  navigate('/', { state: { scrollTo: 'academic-section' } });
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.75rem 1.5rem',
+                  fontSize: '0.95rem',
+                  fontWeight: '600',
+                  color: '#fb923c',
+                  background: 'rgba(251, 146, 60, 0.1)',
+                  border: '1px solid rgba(251, 146, 60, 0.3)',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  marginBottom: '2rem',
+                }}
+              >
+                ← Back to Academic & Student Projects
+              </motion.button>
               <h1 style={{
                 fontSize: 'clamp(2.5rem, 6vw, 4rem)',
                 fontWeight: '800',

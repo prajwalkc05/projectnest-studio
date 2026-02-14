@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ServicesSection from './ServicesSection';
 import FreelancingSection from './FreelancingSection';
@@ -11,6 +11,7 @@ import GlobalBackground from '../components/GlobalBackground';
 
 const Home = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [counts, setCounts] = useState({ projects: 0, clients: 0, tech: 0 });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -18,6 +19,30 @@ const Home = () => {
   const springConfig = { damping: 25, stiffness: 150 };
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    if (location.state?.scrollTo === 'portfolio') {
+      setTimeout(() => {
+        const element = document.getElementById('portfolio');
+        if (element) {
+          const navbarHeight = 73;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - navbarHeight;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+    } else if (location.state?.scrollTo === 'academic-section') {
+      setTimeout(() => {
+        const element = document.getElementById('academic-section');
+        if (element) {
+          const navbarHeight = 73;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - navbarHeight;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -51,7 +76,7 @@ const Home = () => {
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: 'center',
-      padding: '6rem 1rem 4rem',
+      padding: '4rem 1rem 4rem',
       position: 'relative',
       width: '100%',
       maxWidth: '100vw',
@@ -90,10 +115,12 @@ const Home = () => {
               border: '1px solid rgba(251, 146, 60, 0.4)',
               borderRadius: '50px',
               marginBottom: '2.5rem',
-              fontSize: '0.875rem',
+              fontSize: 'clamp(0.75rem, 2vw, 0.875rem)',
               fontWeight: '600',
               color: '#fb923c',
               backdropFilter: 'blur(10px)',
+              maxWidth: '95%',
+              textAlign: 'center',
             }}
           >
             <motion.span

@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GlobalBackground from '../components/GlobalBackground';
 
 const OurWorks = () => {
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [previewVideo, setPreviewVideo] = useState(null);
 
@@ -11,6 +13,7 @@ const OurWorks = () => {
     { id: 2, src: '/WhatsApp Video 2026-02-10 at 20.29.51.mp4', title: 'The Quality Pets', tech: ['React', 'Firebase', 'Tailwind'] },
     { id: 3, src: '/portflio.mp4', title: 'Portfolio Showcase', tech: ['React', 'Framer Motion', 'CSS'] },
     { id: 4, src: '/weather.mp4', title: 'Weather App', tech: ['React', 'API', 'CSS'] },
+    { id: 5, src: '/portfolio2.mp4', title: 'Portfolio 2', tech: ['React', 'Vite', 'CSS'] },
   ];
 
   useEffect(() => {
@@ -19,6 +22,29 @@ const OurWorks = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (previewVideo) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = 'unset';
+      document.body.style.position = 'unset';
+      document.body.style.top = '';
+      document.body.style.width = 'auto';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.body.style.position = 'unset';
+      document.body.style.top = '';
+      document.body.style.width = 'auto';
+    };
+  }, [previewVideo]);
   return (
     <>
       <GlobalBackground />
@@ -31,6 +57,29 @@ const OurWorks = () => {
               transition={{ duration: 0.6 }}
               style={{ textAlign: 'center', marginBottom: '4rem' }}
             >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  navigate('/', { state: { scrollTo: 'portfolio' } });
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.75rem 1.5rem',
+                  fontSize: '0.95rem',
+                  fontWeight: '600',
+                  color: '#fb923c',
+                  background: 'rgba(251, 146, 60, 0.1)',
+                  border: '1px solid rgba(251, 146, 60, 0.3)',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  marginBottom: '2rem',
+                }}
+              >
+                ← Back to our works
+              </motion.button>
               <h1 style={{
                 fontSize: 'clamp(2.5rem, 6vw, 4rem)',
                 fontWeight: '800',
@@ -161,7 +210,8 @@ const OurWorks = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '2rem',
+                    padding: '0',
+                    overflow: 'hidden',
                   }}
                 >
                   <motion.button
@@ -171,15 +221,15 @@ const OurWorks = () => {
                     onClick={() => setPreviewVideo(null)}
                     style={{
                       position: 'absolute',
-                      top: '2rem',
-                      right: '2rem',
-                      width: '48px',
-                      height: '48px',
+                      top: isMobile ? '80px' : '2rem',
+                      right: '1rem',
+                      width: '40px',
+                      height: '40px',
                       borderRadius: '50%',
-                      background: 'rgba(251, 146, 60, 0.2)',
+                      background: 'rgba(251, 146, 60, 0.9)',
                       border: '2px solid #fb923c',
-                      color: '#fb923c',
-                      fontSize: '1.5rem',
+                      color: '#fff',
+                      fontSize: '1.25rem',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
@@ -197,10 +247,14 @@ const OurWorks = () => {
                     controls
                     onClick={(e) => e.stopPropagation()}
                     style={{
-                      maxWidth: '90%',
-                      maxHeight: '90%',
-                      borderRadius: '12px',
+                      width: isMobile ? '100%' : 'auto',
+                      height: isMobile ? 'calc(100vh - 73px)' : 'auto',
+                      maxWidth: isMobile ? '100%' : '70%',
+                      maxHeight: isMobile ? 'calc(100vh - 73px)' : '70vh',
+                      marginTop: isMobile ? '73px' : '0',
+                      borderRadius: isMobile ? '0' : '12px',
                       boxShadow: '0 20px 60px rgba(251, 146, 60, 0.3)',
+                      objectFit: 'contain',
                     }}
                   >
                     <source src={previewVideo.src} type="video/mp4" />
