@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import ServicesSection from './ServicesSection';
 import FreelancingSection from './FreelancingSection';
 import HowItWorks from './HowItWorks';
+import Technologies from './Technologies';
 import WhyChooseUs from './WhyChooseUs';
 import Portfolio from './Portfolio';
+import CustomerReviews from '../components/CustomerReviews';
 import Contact from './Contact';
 import GlobalBackground from '../components/GlobalBackground';
 
@@ -327,8 +329,10 @@ const Home = () => {
     <ServicesSection />
     <FreelancingSection />
     <HowItWorks />
+    <Technologies />
     <WhyChooseUs />
     <Portfolio />
+    <CustomerReviews />
     <Contact />
     </>
   );

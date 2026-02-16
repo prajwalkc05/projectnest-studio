@@ -8,7 +8,7 @@ const ServicesSection = () => {
     { icon: '📝', title: 'Mini & Major Projects', description: 'Complete academic projects with documentation, source code, and presentation support' },
     { icon: '⚡', title: 'Full Stack Projects', description: 'End-to-end web applications with modern frameworks, databases, and deployment' },
     { icon: '📊', title: 'Data Analytics Projects', description: 'Data visualization, machine learning models, and statistical analysis solutions' },
-    { icon: '🔐', title: 'Cybersecurity Projects', description: 'Security systems, encryption tools, and vulnerability assessment applications' },
+    { icon: '🤖', title: 'AI & ML Projects', description: 'Machine learning models, AI applications, and intelligent systems with deployment' },
     { icon: '🎉', title: 'College Fest Websites', description: 'Event management platforms with registration, scheduling, and live updates' },
     { icon: '📋', title: 'Reports & Viva Support', description: 'Professional documentation, technical reports, and presentation preparation' },
   ];

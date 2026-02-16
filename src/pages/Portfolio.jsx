@@ -24,8 +24,8 @@ const Portfolio = () => {
   }, [previewVideo]);
 
   const videos = [
-    { id: 1, src: '/WhatsApp Video 2026-02-10 at 20.29.13.mp4', title: 'Rich club' },
-    { id: 2, src: '/WhatsApp Video 2026-02-10 at 20.29.51.mp4', title: 'The Quality Pets' },
+    { id: 1, src: '/WhatsApp Video 2026-02-10 at 20.29.13.mp4', title: 'Rich Club', description: 'A clothing website for trending fashion and lifestyle' },
+    { id: 2, src: '/WhatsApp Video 2026-02-10 at 20.29.51.mp4', title: 'The Quality Pets', description: 'Pet care and adoption platform with modern features' },
   ];
 
   return (
@@ -96,6 +96,40 @@ const Portfolio = () => {
                 paddingTop: '56.25%',
                 background: '#0f172a',
               }}>
+                {/* Live Signal Badge */}
+                <motion.div
+                  animate={{ opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 0.75rem',
+                    background: 'rgba(239, 68, 68, 0.9)',
+                    borderRadius: '20px',
+                    zIndex: 2,
+                    boxShadow: '0 4px 12px rgba(239, 68, 68, 0.4)',
+                  }}
+                >
+                  <div style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#fff',
+                  }} />
+                  <span style={{
+                    fontSize: '0.75rem',
+                    fontWeight: '600',
+                    color: '#fff',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                  }}>
+                    Live
+                  </span>
+                </motion.div>
                 <video
                   autoPlay
                   loop
@@ -118,7 +152,7 @@ const Portfolio = () => {
                   fontSize: '1.125rem',
                   fontWeight: '700',
                   color: 'var(--text-primary)',
-                  marginBottom: '0.25rem',
+                  marginBottom: '0.5rem',
                 }}>
                   {video.title}
                 </h3>
@@ -126,6 +160,14 @@ const Portfolio = () => {
                   fontSize: '0.875rem',
                   color: 'var(--text-secondary)',
                   lineHeight: '1.5',
+                  marginBottom: '0.5rem',
+                }}>
+                  {video.description}
+                </p>
+                <p style={{
+                  fontSize: '0.75rem',
+                  color: '#fb923c',
+                  fontWeight: '500',
                 }}>
                   Click to preview
                 </p>

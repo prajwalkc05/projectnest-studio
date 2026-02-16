@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlobalBackground from '../components/GlobalBackground';
 
@@ -7,13 +7,23 @@ const OurWorks = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [previewVideo, setPreviewVideo] = useState(null);
+  const scrollPositionRef = useRef(0);
 
-  const allVideos = [
-    { id: 1, src: '/WhatsApp Video 2026-02-10 at 20.29.13.mp4', title: 'Rich Club', tech: ['React', 'Node.js', 'MongoDB'] },
-    { id: 2, src: '/WhatsApp Video 2026-02-10 at 20.29.51.mp4', title: 'The Quality Pets', tech: ['React', 'Firebase', 'Tailwind'] },
-    { id: 3, src: '/portflio.mp4', title: 'Portfolio Showcase', tech: ['React', 'Framer Motion', 'CSS'] },
-    { id: 4, src: '/weather.mp4', title: 'Weather App', tech: ['React', 'API', 'CSS'] },
-    { id: 5, src: '/portfolio2.mp4', title: 'Portfolio 2', tech: ['React', 'Vite', 'CSS'] },
+  const categories = [
+    { name: 'Websites', icon: '🌐', projects: [
+      { id: 1, src: '/WhatsApp Video 2026-02-10 at 20.29.13.mp4', title: 'Rich Club', description: 'A clothing website for trending fashion and lifestyle', tech: ['React', 'Node.js', 'MongoDB'], isLive: true },
+      { id: 2, src: '/WhatsApp Video 2026-02-10 at 20.29.51.mp4', title: 'The Quality Pets', description: 'Pet care and adoption platform with modern features', tech: ['React', 'Firebase', 'Tailwind'], isLive: true },
+    ]},
+    { name: 'Portfolio', icon: '💼', projects: [
+      { id: 3, src: '/portflio.mp4', title: 'Client Portfolio', description: 'Modern animated portfolio with smooth transitions', tech: ['React', 'Framer Motion', 'CSS'], isLive: true },
+      { id: 5, src: '/portfolio2.mp4', title: 'Client Portfolio 2', description: 'Minimalist portfolio design with dark theme', tech: ['React', 'Vite', 'CSS'], isLive: true },
+    ]},
+    { name: 'Mobile Apps', icon: '📱', projects: [
+      { id: 4, src: '/weather.mp4', title: 'Weather App', description: 'weather forecasting with real-time data', tech: ['React', 'Python', 'TensorFlow'], isLive: false },
+    ] },
+    { name: 'Data Analytics', icon: '📊', projects: [] },
+    { name: 'AI & ML', icon: '🤖', projects: [
+    ]},
   ];
 
   useEffect(() => {
@@ -25,25 +35,20 @@ const OurWorks = () => {
 
   useEffect(() => {
     if (previewVideo) {
-      const scrollY = window.scrollY;
+      scrollPositionRef.current = window.scrollY;
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
+      document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.width = '100%';
     } else {
-      const scrollY = document.body.style.top;
-      document.body.style.overflow = 'unset';
-      document.body.style.position = 'unset';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
       document.body.style.top = '';
-      document.body.style.width = 'auto';
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      document.body.style.width = '';
+      if (scrollPositionRef.current) {
+        window.scrollTo(0, scrollPositionRef.current);
+      }
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-      document.body.style.position = 'unset';
-      document.body.style.top = '';
-      document.body.style.width = 'auto';
-    };
   }, [previewVideo]);
   return (
     <>
@@ -102,95 +107,156 @@ const OurWorks = () => {
               </p>
             </motion.div>
 
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-              gap: 'clamp(1.5rem, 3vw, 2.5rem)',
-              maxWidth: '1400px',
-              margin: '0 auto',
-            }}>
-              {allVideos.map((video, index) => (
-                <motion.div
-                  key={video.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  onClick={() => setPreviewVideo(video)}
-                  style={{
-                    background: 'rgba(30, 41, 59, 0.9)',
-                    border: '1px solid rgba(251, 146, 60, 0.2)',
-                    borderRadius: '16px',
-                    overflow: 'hidden',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
-                    cursor: 'pointer',
-                  }}
-                >
+            {categories.map((category, catIndex) => (
+              <motion.div
+                key={category.name}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: catIndex * 0.1 }}
+                style={{ marginBottom: 'clamp(3rem, 6vw, 5rem)' }}
+              >
+                <h2 style={{
+                  fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                  fontWeight: '700',
+                  color: 'var(--text-primary)',
+                  marginBottom: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.75rem',
+                }}>
+                  <span style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}>{category.icon}</span>
+                  {category.name}
+                </h2>
+                {category.projects.length > 0 ? (
                   <div style={{
-                    position: 'relative',
-                    width: '100%',
-                    paddingTop: '56.25%',
-                    background: '#0f172a',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                    gap: '1.25rem',
+                    maxWidth: '800px',
                   }}>
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    >
-                      <source src={video.src} type="video/mp4" />
-                    </video>
-                  </div>
-                  <div style={{ padding: '1.5rem' }}>
-                    <h3 style={{
-                      fontSize: '1.25rem',
-                      fontWeight: '700',
-                      color: 'var(--text-primary)',
-                      marginBottom: '0.5rem',
-                    }}>
-                      {video.title}
-                    </h3>
-                    <p style={{
-                      fontSize: '0.95rem',
-                      color: 'var(--text-secondary)',
-                      lineHeight: '1.6',
-                      marginBottom: '1rem',
-                    }}>
-                      Click to preview full video
-                    </p>
-                    <div style={{
-                      display: 'flex',
-                      gap: '0.5rem',
-                      flexWrap: 'wrap',
-                    }}>
-                      {video.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          style={{
-                            padding: '0.25rem 0.75rem',
-                            fontSize: '0.75rem',
-                            background: 'rgba(251, 146, 60, 0.1)',
+                    {category.projects.map((video, index) => (
+                      <motion.div
+                        key={video.id}
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        onClick={() => setPreviewVideo(video)}
+                        style={{
+                          background: 'rgba(30, 41, 59, 0.9)',
+                          border: '1px solid rgba(251, 146, 60, 0.2)',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        <div style={{
+                          position: 'relative',
+                          width: '100%',
+                          paddingTop: '56.25%',
+                          background: '#0f172a',
+                        }}>
+                          {video.isLive && (
+                            <div style={{
+                              position: 'absolute',
+                              top: '12px',
+                              right: '12px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              padding: '6px 12px',
+                              background: 'rgba(220, 38, 38, 0.95)',
+                              borderRadius: '6px',
+                              fontSize: '0.75rem',
+                              fontWeight: '600',
+                              color: '#fff',
+                              zIndex: 2,
+                              boxShadow: '0 2px 8px rgba(220, 38, 38, 0.4)',
+                            }}>
+                              <span style={{
+                                width: '8px',
+                                height: '8px',
+                                borderRadius: '50%',
+                                background: '#fff',
+                                animation: 'pulse 2s infinite',
+                              }} />
+                              LIVE
+                            </div>
+                          )}
+                          <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                            }}
+                          >
+                            <source src={video.src} type="video/mp4" />
+                          </video>
+                        </div>
+                        <div style={{ padding: '1rem' }}>
+                          <h3 style={{
+                            fontSize: '1.25rem',
+                            fontWeight: '700',
+                            color: 'var(--text-primary)',
+                            marginBottom: '0.5rem',
+                          }}>
+                            {video.title}
+                          </h3>
+                          <p style={{
+                            fontSize: '0.95rem',
+                            color: 'var(--text-secondary)',
+                            lineHeight: '1.6',
+                            marginBottom: '0.75rem',
+                          }}>
+                            {video.description}
+                          </p>
+                          <p style={{
+                            fontSize: '0.875rem',
                             color: '#fb923c',
-                            borderRadius: '6px',
-                            border: '1px solid rgba(251, 146, 60, 0.3)',
-                          }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                            fontStyle: 'italic',
+                          }}>
+                            Click to preview
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                ) : (
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gap: '1rem',
+                    maxWidth: '1000px',
+                  }}>
+                    {[1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          background: 'rgba(30, 41, 59, 0.5)',
+                          border: '1px dashed rgba(251, 146, 60, 0.3)',
+                          borderRadius: '12px',
+                          padding: '2rem 1rem',
+                          textAlign: 'center',
+                          color: 'var(--text-secondary)',
+                          fontSize: '0.875rem',
+                          fontStyle: 'italic',
+                        }}
+                      >
+                        Coming soon...
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            ))}
 
             <AnimatePresence>
               {previewVideo && (
