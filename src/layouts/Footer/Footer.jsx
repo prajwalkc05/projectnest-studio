@@ -228,7 +228,7 @@ const Footer = () => {
               📧 hello@projectnest.studio
             </li>
             <li style={{ marginBottom: '0.75rem', color: '#94a3b8', fontSize: '0.9375rem' }}>
-              📞 +1 (555) 123-4567
+              📞 +91 8310605144
             </li>
             <li style={{ marginBottom: '0.75rem', color: '#94a3b8', fontSize: '0.9375rem' }}>
               💬 WhatsApp Support
@@ -246,7 +246,7 @@ const Footer = () => {
         }}
       >
         <p style={{ color: '#64748b', fontSize: '0.9375rem', margin: 0 }}>
-          © 2024 ProjectNest Studio. All rights reserved.
+          © 2026 BroCode.codes. All rights reserved.
         </p>
       </div>
     </footer>

@@ -176,8 +176,8 @@ const Contact = () => {
               <ContactCard
                 icon="💬"
                 title="Chat on WhatsApp"
-                info="+1 (555) 123-4567"
-                link="https://wa.me/15551234567"
+                info="+91 8310605144"
+                link="https://wa.me/918310605144"
                 delay={0.1}
               />
               <ContactCard
@@ -190,8 +190,8 @@ const Contact = () => {
               <ContactCard
                 icon="📞"
                 title="Call Us"
-                info="+1 (555) 123-4567"
-                link="tel:+15551234567"
+                info="+91 8310605144"
+                link="tel:+918310605144"
                 delay={0.3}
               />
             </div>

@@ -126,7 +126,7 @@ const Navbar = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            ProjectNest Studio
+            BroCode.codes
           </button>
         </motion.div>
 
